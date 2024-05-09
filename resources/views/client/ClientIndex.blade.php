@@ -89,10 +89,24 @@
                     </a>
 
 {{--                    nguoi dung dang nhap tai khoan--}}
-                    <a href="#" class="my-auto">
-                        <i class="fas fa-user fa-2x"></i>
-                    </a>
-
+                    @guest()
+                        <a style="margin-top: 5px; margin-left: 5px" href="{{url("/login")}}"><i class="fa fa-user fa-2x"></i> Login/Register</a>
+                    @endguest
+                    @auth()
+                        <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fas fa-user fa-2x"></i>{{auth()->user()->user_name}}</a>
+                        <div class="dropdown-menu m-0 bg-secondary rounded-0">
+                            <a href="cart.html" class="dropdown-item">Login </a>
+                            <a href="chackout.html" class="dropdown-item">Chackout</a>
+                            <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                            <a href="#" class="dropdown-item"><form action="{{route("logout")}}" method="post">
+                                    @csrf
+                                    <button style="border: none; background-color: white; width: 100%; "
+                                            class="menu-item" type="submit"><i class="fa fa-arrow-right"></i>Log Out</button>
+                                </form></a>
+                        </div>
+                        </div>
+                    @endauth
                 </div>
             </div>
         </nav>
