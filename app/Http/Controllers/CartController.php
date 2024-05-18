@@ -27,8 +27,46 @@ class CartController extends Controller {
 
         $cart = Session::get("cart");
 //        dd($cart);
+        if($cart == null) {
+            $cart = [];
+        }
+
+        $total = 0;
+        foreach ($cart as $index => $obj) {
+            $total += $obj->price * $obj->quantity;
+        }
         return view("/client/ShowCart", [
-            "cart" => $cart
+            "cart" => $cart,
+            "total" => $total
         ]);
+    }
+    public function cartRemove() {
+        Session::forget("cart");
+        Session::flush();
+        Session::save();
+
+        return redirect("/cart");
+    }
+
+    public function cartUpdate($type, $id, $quantity) {
+        $cart = Session::get("cart");
+
+        foreach ($cart as $index => $obj) {
+
+            if($obj->id == $id && $type == "plus") {
+                $obj->quantity = $quantity + 1;
+            }
+            if($obj->id == $id && $type == "minus") {
+                if ($quantity > 1) {
+                    $obj->quantity = $quantity - 1;
+                } else if($quantity == 1) {
+                    unset($cart[$index]);
+                }
+            }
+        }
+        Session::put("cart", $cart);
+//        dd($cart);
+
+        return redirect("/cart");
     }
 }

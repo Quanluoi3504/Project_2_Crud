@@ -33,4 +33,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 #cart
 Route::get('/add-to-cart/{id}/{quantity}', [CartController::class,"addToCart"]);
 Route::get('/cart', [CartController::class,"cart"]);
+Route::get('/cart/remove', [CartController::class,"cartRemove"]);
+Route::get('/cart/update/{type}/{id}/{quantity}', [CartController::class,"cartUpdate"]);
 
