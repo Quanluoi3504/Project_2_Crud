@@ -21,6 +21,8 @@ require __DIR__.'/web_product.php';
 
 require __DIR__.'/web_user.php';
 
+require __DIR__.'/web_cart.php';
+
 
 
 
