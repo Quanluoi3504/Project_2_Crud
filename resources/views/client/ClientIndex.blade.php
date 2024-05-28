@@ -138,9 +138,6 @@
 @if($path == "/")
     @include("user.home")
 @endif
-@if($path == "/cart")
-    @include("user.cart")
-@endif
 
 
 <!-- Footer Start -->
