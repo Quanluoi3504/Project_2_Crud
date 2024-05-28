@@ -26,10 +26,10 @@
             } else {
                 $('.fixed-top').removeClass('shadow').css('top', 0);
             }
-        } 
+        }
     });
-    
-    
+
+
    // Back to top button
    $(window).scroll(function () {
     if ($(this).scrollTop() > 300) {
@@ -133,15 +133,23 @@
 
     // Product Quantity
     $('.quantity button').on('click', function () {
+        var based_price = document.getElementById('based_price').innerHTML;
+        var total = document.getElementById('total').innerHTML;
         var button = $(this);
         var oldValue = button.parent().parent().find('input').val();
         if (button.hasClass('btn-plus')) {
             var newVal = parseFloat(oldValue) + 1;
+            // alert(total);
+            total = newVal*based_price;
+            document.getElementById('total').innerHTML = total;
         } else {
             if (oldValue > 0) {
                 var newVal = parseFloat(oldValue) - 1;
+                total = newVal*based_price;
+                document.getElementById('total').innerHTML = total;
             } else {
                 newVal = 0;
+                document.getElementById('total').innerHTML = newVal;
             }
         }
         button.parent().parent().find('input').val(newVal);

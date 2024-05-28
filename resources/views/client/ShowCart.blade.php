@@ -18,16 +18,17 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link href="/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
 
+    <script src="/js/jquery.min.js"></script>
 </head>
 
 <body>
@@ -43,13 +44,10 @@
 <div class="container-fluid fixed-top">
     <div class="container topbar bg-primary d-none d-lg-block">
         <div class="d-flex justify-content-between">
-            @foreach($web_information as $obj)
             <div class="top-info ps-2">
-                <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#" class="text-white">{{$obj->address}}</a></small>
-                <small class="me-3"><i class="fas fa-phone-alt me-2 text-secondary"></i> <a href="#" class="text-white">{{$obj->phone_number}}</a></small>
-                <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#" class="text-white">{{$obj->email}}</a></small>
+                <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#" class="text-white">123 Street, New York</a></small>
+                <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#" class="text-white">Email@Example.com</a></small>
             </div>
-            @endforeach
             <div class="top-link pe-2">
                 <a href="#" class="text-white"><small class="text-white mx-2">Privacy Policy</small>/</a>
                 <a href="#" class="text-white"><small class="text-white mx-2">Terms of Use</small>/</a>
@@ -59,22 +57,20 @@
     </div>
     <div class="container px-0">
         <nav class="navbar navbar-light bg-white navbar-expand-xl">
-            @foreach($web_information as $obj)
-            <a href="index.html" class="navbar-brand"><h1 class="text-primary display-6">{{$obj->web_name}}</h1></a>
-            @endforeach
+            <a href="/" class="navbar-brand"><h1 class="text-primary display-6">LookBook</h1></a>
             <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="fa fa-bars text-primary"></span>
             </button>
             <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
                 <div class="navbar-nav mx-auto">
-                    <a href="/" class="nav-item nav-link active">Home</a>
-{{--                    <a href="shop.html" class="nav-item nav-link">Shop</a>--}}
-{{--                    <a href="shop-detail.html" class="nav-item nav-link">Shop Detail</a>--}}
+                    <a href="index.html" class="nav-item nav-link">Home</a>
+                    <a href="shop.html" class="nav-item nav-link">Shop</a>
+                    <a href="shop-detail.html" class="nav-item nav-link active">Shop Detail</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                         <div class="dropdown-menu m-0 bg-secondary rounded-0">
                             <a href="cart.html" class="dropdown-item">Cart</a>
-                            <a href="chackout.html" class="dropdown-item">Checkout</a>
+                            <a href="chackout.html" class="dropdown-item">Chackout</a>
                             <a href="testimonial.html" class="dropdown-item">Testimonial</a>
                             <a href="404.html" class="dropdown-item">404 Page</a>
                         </div>
@@ -83,30 +79,13 @@
                 </div>
                 <div class="d-flex m-3 me-0">
                     <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
-                    <a href="#" class="position-relative me-4 my-auto">
+                    <a href="/cart" class="position-relative me-4 my-auto">
                         <i class="fa fa-shopping-bag fa-2x"></i>
                         <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
                     </a>
-
-{{--                    nguoi dung dang nhap tai khoan--}}
-                    @guest()
-                        <a style="margin-top: 5px; margin-left: 5px" href="{{url("/login")}}"><i class="fa fa-user fa-2x"></i> Login/Register</a>
-                    @endguest
-                    @auth()
-                        <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fas fa-user fa-2x"></i>{{auth()->user()->user_name}}</a>
-                        <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                            <a href="cart.html" class="dropdown-item">Login </a>
-                            <a href="chackout.html" class="dropdown-item">Chackout</a>
-                            <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                            <a href="#" class="dropdown-item"><form action="{{route("logout")}}" method="post">
-                                    @csrf
-                                    <button style="border: none; background-color: white; width: 100%; "
-                                            class="menu-item" type="submit"><i class="fa fa-arrow-right"></i>Log Out</button>
-                                </form></a>
-                        </div>
-                        </div>
-                    @endauth
+                    <a href="#" class="my-auto">
+                        <i class="fas fa-user fa-2x"></i>
+                    </a>
                 </div>
             </div>
         </nav>
@@ -135,13 +114,133 @@
 <!-- Modal Search End -->
 
 
-@if($path == "/")
-    @include("user.home")
-@endif
-@if($path == "/cart")
-    @include("user.cart")
-@endif
+<!-- Single Page Header start -->
+<div class="container-fluid page-header py-5">
+    <h1 class="text-center text-white display-6">Shop Detail</h1>
+    <ol class="breadcrumb justify-content-center mb-0">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">Pages</a></li>
+        <li class="breadcrumb-item active text-white">Shop Detail</li>
+    </ol>
+</div>
+<!-- Single Page Header End -->
 
+{{--Cart page start--}}
+<div class="container-fluid py-5">
+    <div class="container py-5">
+
+{{--Check Address start--}}
+        <div>
+            <form action="Check information" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="mt-2 mb-2">
+                    <label for="">Address</label>
+                    <input type="text" name="userAddress"  class="form-control form-control-sm" />
+                </div>
+            </form>
+        </div>
+{{--Check Address end--}}
+
+        <a href="/cart/remove" class="btn btn-infor btn-sm">Clear Cart</a>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Products</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Total</th>
+                </tr>
+                </thead>
+                <tbody>
+                @if(count($cart) == 0)
+                    <tr>
+                        <td colspan="5">No prd in cart</td>
+                    </tr>
+                @endif
+
+                @if(count($cart) != 0)
+                    @foreach ($cart as $obj)
+                        <tr>
+                            <th scope="row">
+                                <div class="d-flex align-items-center">
+                                    <img src="image_product/{{ $obj->image }}" class="img-fluid me-5 " style="width: 80px; height: 80px;" alt="">
+                                </div>
+                            </th>
+                            <td>
+                                <p class="mb-0 mt-4">{{ $obj->product_name }}</p>
+                            </td>
+                            <td>
+                                <p class="mb-0 mt-4" id="based_price">{{ $obj->price }}</p>
+                            </td>
+                            <td>
+                                <div class="input-group quantity mt-4" style="width: 100px;">
+{{--                                    <div class="input-group-btn">--}}
+{{--                                        <button class="btn btn-sm btn-minus rounded-circle bg-light border" >--}}
+{{--                                            <i class="fa fa-minus"></i>--}}
+{{--                                        </button>--}}
+{{--                                    </div>--}}
+                                    <a href="/cart/update/minus/{{ $obj->id }}/{{ $obj->quantity }}" class="fa fa-minus mt-2"></a>
+                                    <input type="text" class="form-control form-control-sm text-center border-0" value="{{ $obj->quantity }}">
+                                    <a href="/cart/update/plus/{{ $obj->id }}/{{ $obj->quantity }}" class="fa fa-plus mt-2"></a>
+{{--                                    <div class="input-group-btn">--}}
+{{--                                        <button class="btn btn-sm btn-plus rounded-circle bg-light border">--}}
+{{--                                            <i class="fa fa-plus"></i>--}}
+{{--                                        </button>--}}
+{{--                                    </div>--}}
+                                </div>
+                            </td>
+                            <td>
+                                <p class="mb-0 mt-4" id="total">{{ $obj->price * $obj->quantity }}</p>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
+                <tr>
+                    <td>
+                        <h4>Total: </h4>
+                    </td>
+                    <td colspan="4">
+                        <h4><span>{{$total}}</span></h4>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+{{--        <div class="mt-5">--}}
+{{--            <input type="text" class="border-0 border-bottom rounded me-5 py-3 mb-4" placeholder="Coupon Code">--}}
+{{--            <button class="btn border-secondary rounded-pill px-4 py-3 text-primary" type="button">Apply Coupon</button>--}}
+{{--        </div>--}}
+{{--        <div class="row g-4 justify-content-end">--}}
+{{--            <div class="col-8"></div>--}}
+{{--            <div class="col-sm-8 col-md-7 col-lg-6 col-xl-4">--}}
+{{--                <div class="bg-light rounded">--}}
+{{--                    <div class="p-4">--}}
+{{--                        <h1 class="display-6 mb-4">Cart <span class="fw-normal">Total</span></h1>--}}
+{{--                        <div class="d-flex justify-content-between mb-4">--}}
+{{--                            <h5 class="mb-0 me-4">Subtotal:</h5>--}}
+{{--                            <p class="mb-0">$96.00</p>--}}
+{{--                        </div>--}}
+{{--                        <div class="d-flex justify-content-between">--}}
+{{--                            <h5 class="mb-0 me-4">Shipping</h5>--}}
+{{--                            <div class="">--}}
+{{--                                <p class="mb-0">Flat rate: $3.00</p>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <p class="mb-0 text-end">Shipping to Ukraine.</p>--}}
+{{--                    </div>--}}
+{{--                    <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">--}}
+{{--                        <h5 class="mb-0 ps-4 me-4">Total</h5>--}}
+{{--                        <p class="mb-0 pe-4">$99.00</p>--}}
+{{--                    </div>--}}
+{{--                    <button class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4" type="button">Proceed Checkout</button>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+    </div>
+</div>
+{{--Cart page end--}}
 
 <!-- Footer Start -->
 <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5">
@@ -208,7 +307,7 @@
                     <p>Email: Example@gmail.com</p>
                     <p>Phone: +0123 4567 8910</p>
                     <p>Payment Accepted</p>
-                    <img src="img/payment.png" class="img-fluid" alt="">
+                    <img src="/img/payment.png" class="img-fluid" alt="">
                 </div>
             </div>
         </div>
@@ -243,13 +342,13 @@
 <!-- JavaScript Libraries -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="lib/easing/easing.min.js"></script>
-<script src="lib/waypoints/waypoints.min.js"></script>
-<script src="lib/lightbox/js/lightbox.min.js"></script>
-<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="/lib/easing/easing.min.js"></script>
+<script src="/lib/waypoints/waypoints.min.js"></script>
+<script src="/lib/lightbox/js/lightbox.min.js"></script>
+<script src="/lib/owlcarousel/owl.carousel.min.js"></script>
 
 <!-- Template Javascript -->
-<script src="js/main.js"></script>
+<script src="/js/main.js"></script>
 </body>
 
 </html>

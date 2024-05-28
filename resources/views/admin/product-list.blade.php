@@ -11,6 +11,7 @@
         <td>Image</td>
         <td>Category Name</td>
         <td>Type</td>
+        <td>Author</td>
 
 
     </tr>
@@ -25,6 +26,7 @@
             <td><img height="50" src="/image_product/{{ $obj->image}}" alt=""></td>
             <td>{{ $obj->category_name }}</td>
             <td>{{ $obj->type_name }}</td>
+            <td>{{ $obj->author_name }}</td>
 
             <td class="text-center"><a href="/admin/product-delete/{{ $obj->id }}" class="btn btn-danger btn-sm">Delete</a></td>
             <td class="text-center"><a href="/admin/product-edit/{{ $obj->id }}" class="btn btn-primary btn-sm">Edit</a></td>

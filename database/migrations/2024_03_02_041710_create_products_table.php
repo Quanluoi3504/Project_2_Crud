@@ -24,6 +24,9 @@ return new class extends Migration
             $table->unsignedBigInteger("type_id")->nullable();
             $table->foreign("type_id")->references("id")->on("type");
 
+            $table->unsignedBigInteger("author_id")->nullable();
+            $table->foreign("author_id")->references("id")->on("author");
+
             $table->timestamps();
         });
     }

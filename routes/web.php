@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminIndexController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CilentProductDetailController;
 use App\Http\Controllers\IndexController;
+use App\Http\Controllers\CartController;
 
 
 //Route::get('/', [ClientIndexController::class, "clientIndex"]);
@@ -30,3 +31,10 @@ require __DIR__.'/web_cart.php';
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+#cart
+Route::get('/add-to-cart/{id}/{quantity}', [CartController::class,"addToCart"]);
+Route::get('/cart', [CartController::class,"cart"]);
+Route::get('/cart/remove', [CartController::class,"cartRemove"]);
+Route::get('/cart/update/{type}/{id}/{quantity}', [CartController::class,"cartUpdate"]);
+

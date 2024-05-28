@@ -14,6 +14,7 @@ class ProductController extends Controller{
         $product = DB::table("products")
             ->join("category", "category.id", "=", "products.category_id")
             ->join("type", "type.id", "=", "products.type_id")
+            ->join("author", "author.id", "=", "products.author_id")
             ->select("products.*", "category.category_name", "type.type_name")
             ->get();
         return view("admin/admin-index", [
@@ -28,11 +29,14 @@ class ProductController extends Controller{
             ->get();
         $types = DB::table("type")
             ->get();
+        $authors = DB::table("author")
+            ->get();
 
         return view("admin/admin-index", [
             "path" => $path,
             "categories" => $categories,
             "types" => $types,
+            "authors" => $authors,
         ]);
     }
     public function save(Request $request) {
@@ -41,6 +45,7 @@ class ProductController extends Controller{
         $description = $request->description;
         $categoryId = $request->categoryId;
         $typeId = $request->typeId;
+        $authorId = $request->authorId;
         $imageName = "";
         if ($request->image != null) {
 
@@ -57,6 +62,7 @@ class ProductController extends Controller{
                 "image" => $imageName,
                 "category_id" => $categoryId,
                 "type_id" => $typeId,
+                "author_id" => $authorId,
             ]);
 
         return redirect("admin/product-list");
@@ -79,12 +85,15 @@ class ProductController extends Controller{
             ->get();
         $type = DB::table("type")
             ->get();
+        $authors = DB::table("author")
+            ->get();
 
         return view("admin/admin-index", [
             "path" => $path,
             "product" => $product,
             "categories" => $categories,
             "type" => $type,
+            "authors" => $authors,
         ]);
     }
     public function update(Request $request) {
@@ -94,6 +103,7 @@ class ProductController extends Controller{
         $description = $request->description;
         $categoryId = $request->categoryId;
         $typeId = $request->typeId;
+        $authorId = $request->authorId;
         $imageName = "";
         if ($request->image!= null) {
             $imageName = $request->image->getClientOriginalName();
@@ -110,6 +120,7 @@ class ProductController extends Controller{
                 "image" => $imageName,
                 "category_id" => $categoryId,
                 "type_id" => $typeId,
+                "author_id" => $authorId,
             ]);
 
         return redirect("admin/product-list");
