@@ -8,11 +8,13 @@ use Illuminate\Support\Facades\DB;
 class HomeController extends Controller
 {
     public function clientIndex() {
+        $path = ("/");
         $products = DB::table("products")
             ->get();
         $web_information = DB::table('web_information')
             ->get();
         return view("client/ClientIndex", [
+            "path"=>$path,
             "products" => $products,
             "web_information" => $web_information
         ]);
@@ -31,4 +33,5 @@ class HomeController extends Controller
     {
         return view('/');
     }
+
 }

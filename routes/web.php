@@ -23,7 +23,9 @@ require __DIR__.'/web_product.php';
 
 require __DIR__.'/web_user.php';
 
-Auth::routes();
+require __DIR__.'/web_cart.php';
+
+
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
