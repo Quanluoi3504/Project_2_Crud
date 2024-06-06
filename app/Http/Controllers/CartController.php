@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
@@ -35,9 +37,12 @@ class CartController extends Controller {
         foreach ($cart as $index => $obj) {
             $total += $obj->price * $obj->quantity;
         }
+        $web_information = DB::table('web_information')
+            ->get();
         return view("/client/ShowCart", [
             "cart" => $cart,
-            "total" => $total
+            "total" => $total,
+            "web_information" => $web_information
         ]);
     }
     public function cartRemove() {
@@ -68,5 +73,55 @@ class CartController extends Controller {
 //        dd($cart);
 
         return redirect("/cart");
+    }
+
+    public function cartCheckout(Request $request)
+    {
+        {
+            $fullName = $request->fullName;
+            $address = $request->address;
+            $phone = $request->phone;
+
+            $total = $request->total;
+            $status = "PENDING";
+
+            $id = DB::table('order')
+                //insert: chi insert vao db
+                //insertGetId: insert va tra ve id
+                ->insertGetId([
+                    "fullName" => $fullName,
+                    "address" => $address,
+                    "phone" => $phone,
+                    "total" => $total,
+                    "status" => $status,
+                    "created_at" => Carbon::now()
+                ]);
+        }
+
+        //thêm vào bảng order_detail
+        {
+            $cart = Session::get("cart");
+            foreach ($cart as $obj) {
+                DB::table('order_detail')
+                    ->insert([
+                        "order_id" => $id,
+                        "product_id" => $obj->id,
+                        "quantity" => $obj->quantity,
+                        "price" => $obj->price,
+                    ]);
+            }
+        }
+        //xóa giỏ hàng
+//        {
+//            Session::forget("cart");
+//            Session::flush();
+//            Session::save();
+//        }
+
+        $web_information = DB::table('web_information')
+            ->get();
+        return view("client/CartCheckoutSuccess", [
+            "web_information" => $web_information
+        ]);
     }
 }

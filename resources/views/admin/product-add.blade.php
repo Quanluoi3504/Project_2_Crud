@@ -28,15 +28,15 @@
             @endforeach
         </select>
     </div>
-    <div class="mt-2 mb-2">
-        <label for="">Type</label>
-        <select name="typeId" id="" class="form-select form-select-sm">
-            <option value="0">Chon Type</option>
-            @foreach ($types as $obj)
-                <option value="{{$obj->id}}">{{$obj->type_name}}</option>
-            @endforeach
-        </select>
-    </div>
+{{--    <div class="mt-2 mb-2">--}}
+{{--        <label for="">Type</label>--}}
+{{--        <select name="typeId" id="" class="form-select form-select-sm">--}}
+{{--            <option value="0">Chon Type</option>--}}
+{{--            @foreach ($types as $obj)--}}
+{{--                <option value="{{$obj->id}}">{{$obj->type_name}}</option>--}}
+{{--            @endforeach--}}
+{{--        </select>--}}
+{{--    </div>--}}
     <div class="mt-2 mb-2">
         <button type="submit" class="btn btn-primary btn-sm">Save</button>
     </div>

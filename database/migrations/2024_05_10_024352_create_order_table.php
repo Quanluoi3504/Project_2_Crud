@@ -13,8 +13,13 @@ return new class extends Migration
     {
         Schema::create('order', function (Blueprint $table) {
             $table->id();
-            $table->string("user_id")->nullable(true);
-            $table->string("status")->nullable(true);
+            $table->string("fullname");
+            $table->string("address");
+            $table->string("phone");
+
+            $table->integer("total");
+            $table->string("status");
+
             $table->timestamps();
         });
     }

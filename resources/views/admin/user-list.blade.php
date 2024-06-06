@@ -22,7 +22,7 @@
     @foreach($user as $obj)
         <tr>
             <td>{{ $obj->id }}</td>
-            <td>{{ $obj->name}}</td>
+            <td>{{ $obj->fullname}}</td>
 {{--            <td>{{ $obj->phone }}</td>--}}
             <td></td>
             <td>{{ $obj->email }}</td>

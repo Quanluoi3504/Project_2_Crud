@@ -14,9 +14,12 @@ class CilentProductDetailController extends Controller
         $productRelated = DB::table('products')
             ->where('id', "!=", $id)
             ->get();
+        $web_information = DB::table('web_information')
+            ->get();
         return view("client/clientProductDetail", [
             "product" => $product,
-            "productRelated" => $productRelated
+            "productRelated" => $productRelated,
+            "web_information" => $web_information
         ]);
     }
 

@@ -27,14 +27,14 @@
             @endforeach
         </select>
     </div>
-    <div class="mt-2 mb-2">
-        <label for="">Type</label>
-        <select class="form-control form-control-sm" name="type">
-            @foreach ($types as $type)
-                <option value="{{$type->id}}">{{$type->type_name}}</option>
-            @endforeach
-        </select>
-    </div>
+{{--    <div class="mt-2 mb-2">--}}
+{{--        <label for="">Type</label>--}}
+{{--        <select class="form-control form-control-sm" name="type">--}}
+{{--            @foreach ($types as $type)--}}
+{{--                <option value="{{$type->id}}">{{$type->type_name}}</option>--}}
+{{--            @endforeach--}}
+{{--        </select>--}}
+{{--    </div>--}}
 
     <div class="mt-2 mb-2">
         <button class="btn btn-primary btn-sm">Update</button>
