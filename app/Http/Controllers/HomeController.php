@@ -10,9 +10,12 @@ class HomeController extends Controller
     public function clientIndex() {
         $path = ("/");
         $products = DB::table("products")
+            ->join("category", "category.id", "=", "products.category_id")
+            ->select("products.*", "category.category_name")
             ->get();
         $web_information = DB::table('web_information')
             ->get();
+//        dd($products);
         return view("client/ClientIndex", [
             "path"=>$path,
             "products" => $products,

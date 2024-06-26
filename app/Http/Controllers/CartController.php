@@ -8,7 +8,42 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller {
-    public function addToCart($id, $quantity) {
+    public function addToCart($id, $quantity)
+    {
+        if ($quantity <= 0) {
+            return redirect('/product-detail/' . $id)->with('error', 'Quantity must be greater than 0.');
+        }
+
+        $product = DB::table('products')
+            ->where('id', $id)
+            ->first();
+
+        if (!$product) {
+            return redirect('/product-detail/' . $id)->with('error', 'Product not found.');
+        }
+
+        if ($product->quantity < $quantity) {
+            return redirect('/product-detail/' . $id)->with('error', 'Not enough stock available.');
+        }
+
+        $cart = Session::get('cart', []);
+
+        // Kiểm tra sản phẩm đã có trong giỏ hàng chưa
+        $found = false;
+        foreach ($cart as $index => $item) {
+            if ($item->id == $id) {
+                $cart[$index]->quantity += $quantity;  // Cộng dồn số lượng
+                $found = true;
+                break;
+            }
+        }
+
+        // Nếu sản phẩm chưa có trong giỏ, thêm mới
+        if (!$found) {
+            $product->quantity = $quantity;
+            array_push($cart, $product);
+        }
+
         $product = DB::table('products')
             ->where('id', $id)
             ->first();
@@ -32,9 +67,8 @@ class CartController extends Controller {
         if($cart == null) {
             $cart = [];
         }
-
         $total = 0;
-        foreach ($cart as $index => $obj) {
+        foreach ($cart as $product => $obj) {
             $total += $obj->price * $obj->quantity;
         }
         $web_information = DB::table('web_information')
@@ -84,11 +118,13 @@ class CartController extends Controller {
 
             $total = $request->total;
             $status = "PENDING";
+//            $customerid = Auth::id();
 
             $id = DB::table('order')
                 //insert: chi insert vao db
                 //insertGetId: insert va tra ve id
                 ->insertGetId([
+//                    "customer_id" => $customerid,
                     "fullName" => $fullName,
                     "address" => $address,
                     "phone" => $phone,
@@ -110,13 +146,8 @@ class CartController extends Controller {
                         "price" => $obj->price,
                     ]);
             }
+            Session::forget("cart");
         }
-        //xóa giỏ hàng
-//        {
-//            Session::forget("cart");
-//            Session::flush();
-//            Session::save();
-//        }
 
         $web_information = DB::table('web_information')
             ->get();

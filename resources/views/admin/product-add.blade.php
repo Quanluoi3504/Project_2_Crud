@@ -12,6 +12,10 @@
         <input type="text" name="price" class="form-control form-control-sm" />
     </div>
     <div class="mt-2 mb-2">
+        <label for="">Quantity</label>
+        <input type="text" name="quantity" class="form-control form-control-sm" />
+    </div>
+    <div class="mt-2 mb-2">
         <label for="">Description</label>
         <input type="text" name="description" class="form-control form-control-sm" />
     </div>
@@ -28,15 +32,24 @@
             @endforeach
         </select>
     </div>
-{{--    <div class="mt-2 mb-2">--}}
-{{--        <label for="">Type</label>--}}
-{{--        <select name="typeId" id="" class="form-select form-select-sm">--}}
-{{--            <option value="0">Chon Type</option>--}}
-{{--            @foreach ($types as $obj)--}}
-{{--                <option value="{{$obj->id}}">{{$obj->type_name}}</option>--}}
-{{--            @endforeach--}}
-{{--        </select>--}}
-{{--    </div>--}}
+    <div class="mt-2 mb-2">
+        <label for="">Type</label>
+        <select name="typeId" id="" class="form-select form-select-sm">
+            <option value="0">Chon Type</option>
+            @foreach ($types as $obj)
+                <option value="{{$obj->id}}">{{$obj->type_name}}</option>
+            @endforeach
+        </select>
+    </div>
+    <div class="mt-2 mb-2">
+        <label for="">Author</label>
+        <select name="authorId" id="" class="form-select form-select-sm">
+            <option value="0">Chon Tac Gia</option>
+            @foreach ($authors as $obj)
+                <option value="{{$obj->id}}">{{$obj->author_name}}</option>
+            @endforeach
+        </select>
+    </div>
     <div class="mt-2 mb-2">
         <button type="submit" class="btn btn-primary btn-sm">Save</button>
     </div>

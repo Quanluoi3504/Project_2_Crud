@@ -7,9 +7,11 @@ use Illuminate\Support\Facades\DB;
 class OrderController extends Controller
 {
     public function getAll() {
+        $path = ("admin/order-list");
         $order = DB::table("order")
             ->get();
-        return view("admin/order-list", [
+        return view("admin/admin-index", [
+            "path" => $path,
             "order" => $order,
         ]);
     }
@@ -57,6 +59,28 @@ class OrderController extends Controller
         return view("/admin/AdminStatistic", [
             "obj1" => $obj1,
             "obj2" => $obj2
+        ]);
+    }
+    public function OrderDetails($id)
+    {
+        $path = ("admin/order-details");
+        $order = DB::table("order")
+            ->where("id", $id)
+            ->first();
+
+        $orderItems = DB::table("order_detail")
+            ->join("products", "order_detail.product_id", "=", "product_id")
+            ->where("order_detail.order_id", $id)
+            ->select("order_detail.*", "product_name as product_name")
+            ->get();
+
+//        $sql = $orderItems->toSql();
+//        dd($sql);
+//        dd($orderItems);
+        return view("admin/admin-index", [
+            "path" => $path,
+            "order" => $order,
+            "orderItems" => $orderItems,
         ]);
     }
 }

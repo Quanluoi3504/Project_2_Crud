@@ -77,13 +77,13 @@
 /*** Topbar Start ***/
 .fixed-top {
     transition: 0.5s;
-    background: var(--bs-white);
+    background: var(--bs-black);
     border: 0;
 }
 
 .topbar {
     padding: 20px;
-    border-radius: 230px 100px;
+    /*border-radius: 230px 100px;*/
 }
 
 .topbar .top-info {
@@ -194,7 +194,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 25px;
-    background: linear-gradient(rgba(255, 181, 36, 0.7), rgba(255, 181, 36, 0.7));
+    background: linear-gradient(rgba(255, 193, 36, 0.7), rgba(255, 181, 36, 0.7));
 }
 
 .carousel-control-next,

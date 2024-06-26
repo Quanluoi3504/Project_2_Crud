@@ -12,6 +12,10 @@
         <input type="text" name="price" value="{{$product->price}}" class="form-control form-control-sm"/>
     </div>
     <div class="mt-2 mb-2">
+        <label for="">Quantity</label>
+        <input type="text" name="quantity" value="{{$product->quantity}}" class="form-control form-control-sm"/>
+    </div>
+    <div class="mt-2 mb-2">
         <label for="">Description</label>
         <input type="text" name="description" value="{{$product->description}}" class="form-control form-control-sm"/>
     </div>
@@ -27,14 +31,14 @@
             @endforeach
         </select>
     </div>
-{{--    <div class="mt-2 mb-2">--}}
-{{--        <label for="">Type</label>--}}
-{{--        <select class="form-control form-control-sm" name="type">--}}
-{{--            @foreach ($types as $type)--}}
-{{--                <option value="{{$type->id}}">{{$type->type_name}}</option>--}}
-{{--            @endforeach--}}
-{{--        </select>--}}
-{{--    </div>--}}
+    <div class="mt-2 mb-2">
+        <label for="">Type</label>
+        <select class="form-control form-control-sm" name="type">
+            @foreach ($types as $type)
+                <option value="{{$type->id}}">{{$type->type_name}}</option>
+            @endforeach
+        </select>
+    </div>
 
     <div class="mt-2 mb-2">
         <button class="btn btn-primary btn-sm">Update</button>

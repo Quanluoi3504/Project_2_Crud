@@ -6,6 +6,8 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
     <style>
         .line {
             border-bottom: 1px solid black; /* Adjust thickness, color, and style as needed */
@@ -54,17 +56,16 @@
         <div class="container-fluid">
             <div class="sidebar">
                 <div class="row row-cols-1 row-cols-md-6 g-5">
-                    <a class="navbar-brand col ms-5 mt-5" href="#">Logo</a>
-                    <div class="col">
-                        <h4>username</h4>
-                        <p style="line-height: 0.5">admin</p>
-                    </div>
+                    <a class="navbar-brand col ms-5 mt-5" href="#"><h2>LookBook</h2></a>
                 </div>
                 <div class="line"></div>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <ul style="border-top: #2b2f32 1px solid;  margin-left: 10%">
+{{--                    <li style="margin-top: 10%">--}}
+{{--                        <a class="nav-link" href="/admin/dash-board">Dash Board</a>--}}
+{{--                    </li>--}}
                     <li style="margin-top: 10%">
                         <a class="nav-link" href="/admin/category-list">Category List</a>
                     </li>
@@ -82,6 +83,10 @@
         </div>
     </nav>
     <div class="content">
+{{--        @if($path == "admin/dash-board")--}}
+{{--            @include("admin.dash-board")--}}
+{{--        @endif--}}
+
         @if($path == "admin/category-list")
             @include("admin.category-list")
         @endif
@@ -107,6 +112,14 @@
         @endif
         @if($path == "admin/user-add")
             @include("admin.user-add")
+        @endif
+
+        @if($path == "admin/order-list")
+            @include("admin.order-list")
+        @endif
+
+        @if($path == "admin/order-details")
+            @include("admin.order-details")
         @endif
     </div>
 </body>

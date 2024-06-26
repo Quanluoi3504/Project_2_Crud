@@ -13,9 +13,9 @@ class ProductController extends Controller{
 //        SELECT * FROM product JOIN product category ON category.id = category.
         $product = DB::table("products")
             ->join("category", "category.id", "=", "products.category_id")
-//            ->join("type", "type.id", "=", "products.type_id")
-//            ->join("author", "author.id", "=", "products.author_id")
-            ->select("products.*", "category.category_name")
+            ->join("type", "type.id", "=", "products.type_id")
+            ->join("author", "author.id", "=", "products.author_id")
+            ->select("products.*", "category.category_name","type.type_name","author.author_name")
             ->get();
         return view("admin/admin-index", [
             "path" => $path,
@@ -27,25 +27,26 @@ class ProductController extends Controller{
 
         $categories = DB::table("category")
             ->get();
-//        $types = DB::table("type")
-//            ->get();
-//        $authors = DB::table("author")
-//            ->get();
+        $types = DB::table("type")
+            ->get();
+        $authors = DB::table("author")
+            ->get();
 
         return view("admin/admin-index", [
             "path" => $path,
             "categories" => $categories,
-//            "types" => $types,
-//            "authors" => $authors,
+            "types" => $types,
+            "authors" => $authors,
         ]);
     }
     public function save(Request $request) {
         $productName = $request->productName;
         $price = $request->price;
+        $quantity = $request->quantity;
         $description = $request->description;
         $categoryId = $request->categoryId;
-//        $typeId = $request->typeId;
-//        $authorId = $request->authorId;
+        $typeId = $request->typeId;
+        $authorId = $request->authorId;
         $imageName = "";
         if ($request->image != null) {
 
@@ -53,16 +54,17 @@ class ProductController extends Controller{
 
             $request->image->move(public_path("image_product"), $imageName);
         }
-
+//        dd($authorId);
         DB::table("products")
             ->insert([
                 "product_name" => $productName,
                 "price" => $price,
+                "quantity" => $quantity,
                 "description" => $description,
                 "image" => $imageName,
                 "category_id" => $categoryId,
-//                "type_id" => $typeId,
-//                "author_id" => $authorId,
+                "type_id" => $typeId,
+                "author_id" => $authorId
             ]);
 
         return redirect("admin/product-list");
@@ -83,27 +85,28 @@ class ProductController extends Controller{
 
         $categories = DB::table("category")
             ->get();
-//        $type = DB::table("type")
-//            ->get();
-//        $authors = DB::table("author")
-//            ->get();
+        $type = DB::table("type")
+            ->get();
+        $authors = DB::table("author")
+            ->get();
 
         return view("admin/admin-index", [
             "path" => $path,
             "product" => $product,
             "categories" => $categories,
-//            "type" => $type,
-//            "authors" => $authors,
+            "type" => $type,
+            "authors" => $authors,
         ]);
     }
     public function update(Request $request) {
         $id = $request->id;
         $productName = $request->productName;
         $price = $request->price;
+        $quantity = $request->quantity;
         $description = $request->description;
         $categoryId = $request->categoryId;
-//        $typeId = $request->typeId;
-//        $authorId = $request->authorId;
+        $typeId = $request->typeId;
+        $authorId = $request->authorId;
         $imageName = "";
         if ($request->image!= null) {
             $imageName = $request->image->getClientOriginalName();
@@ -116,11 +119,12 @@ class ProductController extends Controller{
             ->update([
                 "product_name" => $productName,
                 "price" => $price,
+                "quantity" => $quantity,
                 "description" => $description,
                 "image" => $imageName,
                 "category_id" => $categoryId,
-//                "type_id" => $typeId,
-//                "author_id" => $authorId,
+                "type_id" => $typeId,
+                "author_id" => $authorId,
             ]);
 
         return redirect("admin/product-list");

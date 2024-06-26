@@ -82,19 +82,28 @@
             <div>
                 <form action="/cart/checkout" method="post" enctype="multipart/form-data">
                     @csrf
-                    <div class="mt-3 mb-3 row-1 col-5">
-                        <label for="">Full Name</label>
-                        <input type="text" name="fullName" required class="form-control form-control-sm" />
-                    </div>
-                    <div class="mt-3 mb-3 row-1 col-5">
-                        <label for="">Phone</label>
-                        <input type="text" name="phone" required class="form-control form-control-sm" />
-                    </div>
+                    <table>
+                        <td class="col-5">
+                            <div class="mt-3 mb-3">
+                                <label for="">Full Name</label>
+                                <input type="text" name="fullName" required class="form-control form-control-sm" />
+                            </div>
+                        </td>
+                        <td class="col-3">
+                            <div class="mt-3 mb-3">
+                                <label for="">Phone</label>
+                                <input type="text" name="phone" required class="form-control form-control-sm" />
+                            </div>
+                        </td>
+                    </table>
                     <div class="mt-3 mb-3">
                         <label for="">Address</label>
                         <input type="text" name="address" required class="form-control form-control-sm" />
                     </div>
-                    <input type="text" name="total" class="form-control form-control-sm" value="{{$total}}" />
+                    <div class="mt-3 mb-3">
+                        <label for="">Total</label>
+                        <input type="text" name="total" class="form-control form-control-sm" value="{{$total}}" />
+                    </div>
                     <div>
                         <button type="submit" class="btn btn-primary btn-sm">Purchase</button>
                     </div>
